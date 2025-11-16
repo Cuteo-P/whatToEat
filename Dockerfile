@@ -4,11 +4,10 @@ WORKDIR /app
 COPY main.py /app/main.py
 COPY requirements.txt /app/requirements.txt
 
-# Install Python3 & pip
-RUN apt-get update && apt-get install -y python3 python3-pip
+# Install Python dependencies (pip is already present)
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-# Pull model
+# Pull the Mistral model
 RUN ollama pull mistral
 
 EXPOSE 8000
