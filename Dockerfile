@@ -4,9 +4,11 @@ WORKDIR /app
 COPY main.py /app/main.py
 COPY requirements.txt /app/requirements.txt
 
-RUN apk add --no-cache python3 py3-pip
-RUN pip3 install -r requirements.txt
+# Install Python3 & pip
+RUN apt-get update && apt-get install -y python3 python3-pip
+RUN pip3 install --no-cache-dir -r requirements.txt
 
+# Pull model
 RUN ollama pull mistral
 
 EXPOSE 8000
